@@ -25,7 +25,7 @@
 
 
 //Location Alert Messages
-"allowLocationAccessTitle" = "Standortzugriff zulassen"
-"allowLocationAccessMessage"  =   "Diese App benötigt Zugriff auf Ihren Standort. Aktivieren Sie die Ortungsdienste in Ihren Geräteeinstellungen."
-"settingsTitle" = "die Einstellungen"
-"skipTitle" = "Überspringen"
+"allowLocationAccessTitle" = "Standortzugriff zulassen";
+"allowLocationAccessMessage"  =   "Diese App benötigt Zugriff auf Ihren Standort. Aktivieren Sie die Ortungsdienste in Ihren Geräteeinstellungen.";
+"settingsTitle" = "die Einstellungen";
+"skipTitle" = "Überspringen";

@@ -69,7 +69,6 @@ class BottomSheetVC: UIViewController {
     
     func onFetchStart() {
         enableDisableProperty(interAction: false, timer: true)
-        self.labelRulesMsg.text = ""
         if countDown != nil{
             countDown!.invalidate()
         }else{
@@ -112,11 +111,11 @@ class BottomSheetVC: UIViewController {
     
     func rotateDropDownIcon(rotateImage: Bool) {
         if rotateImage{
-            UIView.animate(withDuration: 1.0, animations: {
+            UIView.animate(withDuration: 3.0, animations: {
                 self.imageUp.transform = CGAffineTransform.identity
             })
         }else{
-            UIView.animate(withDuration: 0.0, animations: {
+            UIView.animate(withDuration: 3.0, animations: {
                 self.imageUp.transform = CGAffineTransform(rotationAngle: .pi)
             })
         }

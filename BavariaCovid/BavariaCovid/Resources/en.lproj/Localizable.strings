@@ -24,9 +24,9 @@
 "notificationTitle" = "Bavaria Covid";
 
 //Location Alert Messages
-"allowLocationAccessTitle" = "Allow Location Access"
-"allowLocationAccessMessage"  =   "This app needs access to your location. Turn on Location Services in your device settings."
-"settingsTitle" = "Settings"
-"skipTitle" = "Skip"
+"allowLocationAccessTitle" = "Allow Location Access";
+"allowLocationAccessMessage"  =   "This app needs access to your location. Turn on Location Services in your device settings.";
+"settingsTitle" = "Settings";
+"skipTitle" = "Skip";
 
 

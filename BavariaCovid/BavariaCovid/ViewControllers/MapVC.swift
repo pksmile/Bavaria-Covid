@@ -11,6 +11,7 @@ import UserNotifications
 import CoreLocation
 
 class MapVC: UIViewController {
+    var previousLocation = CLLocation()
     var locationPresenter : LocationPresenter?
     var presenter: MapViewToPresenterProtocol?
     var mapInteractor  = ""
@@ -130,15 +131,35 @@ extension MapVC: MapPresenterToViewProtocol{
     }
     
     func checkUserState(feature: FeatureModel) {
-        let locationCoordinates: [CLLocationCoordinate2D] = feature.toCoordinates()
-        let polygons = MKPolygon(coordinates: locationCoordinates, count: locationCoordinates.count)
-        let polygonRenderer = MKPolygonRenderer(polygon: polygons)
-        let mapPoint: MKMapPoint = MKMapPoint((locationPresenter?.currentUserLocation.coordinate)!)
-        let polygonViewPoint: CGPoint = polygonRenderer.point(for: mapPoint)
+            let locationCoordinates: [CLLocationCoordinate2D] = feature.toCoordinates()
+            let polygons = MKPolygon(coordinates: locationCoordinates, count: locationCoordinates.count)
+            let polygonRenderer = MKPolygonRenderer(polygon: polygons)
+            let mapPoint: MKMapPoint = MKMapPoint((locationPresenter?.currentUserLocation.coordinate)!)
+            let polygonViewPoint: CGPoint = polygonRenderer.point(for: mapPoint)
 
-        if polygonRenderer.path.contains(polygonViewPoint)
-        {
-            switch feature.attributes!.cases7_per_100k {
+            if polygonRenderer.path.contains(polygonViewPoint)
+            {
+                print(previousLocation)
+                
+                if previousLocation.coordinate.latitude == 0.0 || previousLocation.coordinate.longitude == 0.0{
+                    previousLocation = locationPresenter!.currentUserLocation
+                    checkCovidRules(cases7per100: feature.attributes!.cases7_per_100k)
+                }else{
+                    let presentNotification: Bool = calculateDistancE(previousCoordinnate: previousLocation, newCoordinate: locationPresenter!.currentUserLocation)
+                    if presentNotification{
+                        previousLocation = locationPresenter!.currentUserLocation
+                        checkCovidRules(cases7per100: feature.attributes!.cases7_per_100k)
+                    }
+                }
+                
+                
+            }else{
+//                print("Not in Polygonn")
+            }
+        }
+        
+        func checkCovidRules(cases7per100: Float) {
+            switch cases7per100 {
             case 0..<35:
                 bottomSheetVC.setMessage(msg: CovidRulesMsg.rulesMsgGreen)
                 UNUserNotificationCenter.sendCovideAlertMsg(title: Notification.notificationTitle, message: CovidRulesMsg.rulesMsgGreen)
@@ -152,12 +173,17 @@ extension MapVC: MapPresenterToViewProtocol{
                 bottomSheetVC.setMessage(msg: CovidRulesMsg.rulesMsgDarkRed)
                 UNUserNotificationCenter.sendCovideAlertMsg(title: Notification.notificationTitle, message: CovidRulesMsg.rulesMsgDarkRed)
             }
-//            print("Your location was inside your polygon.\(String(describing: feature.attributes?.cases7_per_100k))")
-            
-        }else{
-//            print("Not in Polygonn")
         }
-    }
+        
+        func calculateDistancE(previousCoordinnate: CLLocation,newCoordinate: CLLocation) -> Bool {
+            let distanceInMeters = previousCoordinnate.distance(from: newCoordinate)
+            let distanceInmiles = distanceInMeters / 1609
+            if distanceInmiles > 1.5{
+                return true
+            }else{
+                return false
+            }
+        }
 }
 
 extension MapVC {
@@ -168,6 +194,4 @@ extension MapVC {
     func onFetchEnd() {
         bottomSheetVC.onFetchEnd()
     }
-    
-    
 }

@@ -6,20 +6,20 @@
 //
 
 import UIKit
+import UserNotifications
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
-//    var window: UIWindow?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
-        
-//        let liveNews = MapRouter.createModule()
-//        
-//        window = UIWindow(frame: UIScreen.main.bounds)
-//        window?.rootViewController = liveNews
-//        window?.makeKeyAndVisible()
+        UNUserNotificationCenter.current().delegate = self
+        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound]) { (granted, error) in
+            if granted {
+                print("Notification Permission Granted")
+            }
+        }
         
         return true
     }
@@ -41,3 +41,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 }
 
+
+//MARK:- UNUSerNotificationDelegates
+
+extension AppDelegate:  UNUserNotificationCenterDelegate{
+    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        completionHandler([.list,.banner, .badge, .sound])
+    }
+    
+    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
+        print("Usrinfo associated with notification == \(response.notification.request.content.userInfo)")
+
+        completionHandler()
+    }
+}
