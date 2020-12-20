@@ -1,0 +1,31 @@
+/* 
+  Localizable.strings
+  BavariaCovid
+
+  Created by PRAKASH on 12/20/20.
+  
+*/
+
+//Bottom Sheet
+"loadData" = "Daten laden in";
+
+//Alert
+"err" = "Error";
+"serverError" = "Daten können nicht vom Server abgerufen werden.";
+"okay" = "okay";
+
+//Rules Message
+"greenRules" = "- Einschränkungen des persönlichen Kontakts im öffentlichen Raum \ n- Private Veranstaltungen (z. B. Hochzeiten usw.) mit maximal 100 Teilnehmern in geschlossenen Räumen und maximal 200 Teilnehmern im Freien \ n- Das Tragen einer Maske ist obligatorisch wenn (einschließlich, aber nicht beschränkt auf) die Nutzung öffentlicher Verkehrsmittel, Einkaufen, Essen und Trinken in Restaurants, Bars usw. und falls der Mindestabstand (1,5 m) nicht eingehalten werden kann ";
+"yellowRules" = "- Private Feiern und Kontakte: nicht mehr als zwei Haushalte oder zehn Personen \ n- Das Tragen einer Maske ist in stark frequentierten Räumen, in Fußgängerzonen, in öffentlichen Gebäuden, in weiterführenden Schulen während des Unterrichts, an Universitäten und für Teilnehmer von (Sport) obligatorisch ) Veranstaltungen usw. \ n- Ausgangssperre und Verbot des Verkaufs sowie des Alkoholkonsums im öffentlichen Raum ab 23:00 Uhr ";
+"redRules" = "- Private Feiern und Kontakte: nicht mehr als 5 Haushalte oder fünf Personen \ n- Das Tragen einer Maske ist in stark frequentierten Räumen, in Fußgängerzonen, in öffentlichen Gebäuden für alle Klassenstufen, an Universitäten und für Teilnehmer von (Sport) obligatorisch ) Veranstaltungen usw. \ n- Ausgangssperre und Verbot des Verkaufs sowie des Konsums von Alkohol im öffentlichen Raum ab 22:00 Uhr auf dem ADDITONAL Signal for Bavaria ";
+"darkGreenRules" = "- Veranstaltungen (z. B. Clubtreffen, Sportveranstaltungen, kulturelle Veranstaltungen usw.) dürfen 50 Personen nicht überschreiten. \ N- Schließzeit für Lebensmittel- / Gastronomie-Verkaufsstellen, Verbot des Alkoholverkaufs und Alkoholkonsumverkaufs an bestimmten öffentlichen Orten ab 21:00 Uhr.";
+
+//Notification Title
+"notificationTitle" = "Bayern Covid";
+
+
+//Location Alert Messages
+"allowLocationAccessTitle" = "Standortzugriff zulassen"
+"allowLocationAccessMessage"  =   "Diese App benötigt Zugriff auf Ihren Standort. Aktivieren Sie die Ortungsdienste in Ihren Geräteeinstellungen."
+"settingsTitle" = "die Einstellungen"
+"skipTitle" = "Überspringen"

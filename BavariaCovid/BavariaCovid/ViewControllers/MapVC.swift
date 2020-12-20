@@ -16,6 +16,8 @@ class MapVC: UIViewController {
     var mapInteractor  = ""
     var case7per100: Float = 0.0
     @IBOutlet weak var mapView: MKMapView!
+    let bottomSheetVC = BottomSheetVC()
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,13 +36,6 @@ class MapVC: UIViewController {
         // Do any additional setup after loading the view.
         mapView.delegate = self
         presenter?.updateView()
-        
-        
-        
-        if locationPresenter    ==  nil{
-            locationPresenter   =   LocationPresenter(viewC: self)
-        }
-        locationPresenter?.checkUsersLocationServicesAuthorization()
     }
     
 
@@ -60,6 +55,18 @@ class MapVC: UIViewController {
             locationPresenter   =   LocationPresenter(viewC: self)
         }
         locationPresenter?.checkUsersLocationServicesAuthorization()
+        addBottomSheetView()
+        
+    }
+    
+    func addBottomSheetView(scrollable: Bool? = true) {
+        self.addChild(bottomSheetVC)
+        self.view.addSubview(bottomSheetVC.view)
+        bottomSheetVC.didMove(toParent: self)
+
+        let height = view.frame.height
+        let width  = view.frame.width
+        bottomSheetVC.view.frame = CGRect(x: 0, y: self.view.frame.maxY, width: width, height: height)
     }
     
     
@@ -88,7 +95,7 @@ extension MapVC : MKMapViewDelegate{
 
 
 // MARK: - LiveNewsListPresenterToViewProtocol
-extension MapVC: MapPresenterToViewProtocol {
+extension MapVC: MapPresenterToViewProtocol{
 
     func drawColorsOnMap(){
         let overlays = mapView.overlays
@@ -113,7 +120,7 @@ extension MapVC: MapPresenterToViewProtocol {
     }
     
     func showError() {
-        AlertControl().showAlert(title: "Error", message: "Can Not fetch data from server.", viewController: self, okButtonTitle: "Okay")
+        AlertControl().showAlert(title: AlertMsg.headerErrorMessage, message: AlertMsg.DescServerErrMsg, viewController: self, okButtonTitle: AlertMsg.actionOkay)
     }
     
     func onLocationChange() {
@@ -133,19 +140,34 @@ extension MapVC: MapPresenterToViewProtocol {
         {
             switch feature.attributes!.cases7_per_100k {
             case 0..<35:
-                UNUserNotificationCenter.sendCovideAlertMsg(title: "Bavaria Covid", message: rules.green.rawValue)
+                bottomSheetVC.setMessage(msg: CovidRulesMsg.rulesMsgGreen)
+                UNUserNotificationCenter.sendCovideAlertMsg(title: Notification.notificationTitle, message: CovidRulesMsg.rulesMsgGreen)
             case 36..<50:
-                UNUserNotificationCenter.sendCovideAlertMsg(title: "Bavaria Covid", message: rules.yellow.rawValue)
+                bottomSheetVC.setMessage(msg: CovidRulesMsg.rulesMsgYellow)
+                UNUserNotificationCenter.sendCovideAlertMsg(title: Notification.notificationTitle, message: CovidRulesMsg.rulesMsgYellow)
             case 51..<100:
-                UNUserNotificationCenter.sendCovideAlertMsg(title: "Bavaria Covid", message: rules.red.rawValue)
+                bottomSheetVC.setMessage(msg: CovidRulesMsg.rulesMsgRed)
+                UNUserNotificationCenter.sendCovideAlertMsg(title: Notification.notificationTitle, message: CovidRulesMsg.rulesMsgRed)
             default:
-                UNUserNotificationCenter.sendCovideAlertMsg(title: "Bavaria Covid", message: rules.darkGreen.rawValue)
+                bottomSheetVC.setMessage(msg: CovidRulesMsg.rulesMsgDarkRed)
+                UNUserNotificationCenter.sendCovideAlertMsg(title: Notification.notificationTitle, message: CovidRulesMsg.rulesMsgDarkRed)
             }
-            print("Your location was inside your polygon.\(String(describing: feature.attributes?.cases7_per_100k))")
+//            print("Your location was inside your polygon.\(String(describing: feature.attributes?.cases7_per_100k))")
             
         }else{
-            print("Not in Polygonn")
+//            print("Not in Polygonn")
         }
     }
 }
 
+extension MapVC {
+    func onFetchStart() {
+        bottomSheetVC.onFetchStart()
+    }
+    
+    func onFetchEnd() {
+        bottomSheetVC.onFetchEnd()
+    }
+    
+    
+}

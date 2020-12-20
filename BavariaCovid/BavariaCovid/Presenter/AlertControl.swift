@@ -18,10 +18,10 @@ class AlertControl: NSObject {
     }
     
     func showLocationAlertOn(viewController : UIViewController){
-        let alert = UIAlertController(title: "Allow Location Access", message: "This app needs access to your location. Turn on Location Services in your device settings.", preferredStyle: UIAlertController.Style.alert)
+        let alert = UIAlertController(title: AlertMessage.allowLocationAccessTitle, message: AlertMessage.allowLocationAccessMessage, preferredStyle: UIAlertController.Style.alert)
 
         // Button to Open Settings
-        alert.addAction(UIAlertAction(title: "Settings", style: UIAlertAction.Style.default, handler: { action in
+        alert.addAction(UIAlertAction(title: AlertMessage.settingsTitle, style: UIAlertAction.Style.default, handler: { action in
             guard let settingsUrl = URL(string: UIApplication.openSettingsURLString) else {
                 return
             }
@@ -31,7 +31,7 @@ class AlertControl: NSObject {
                 })
             }
         }))
-        alert.addAction(UIAlertAction(title: "Skip", style: UIAlertAction.Style.default, handler: { action in
+        alert.addAction(UIAlertAction(title: AlertMessage.skipTitle, style: UIAlertAction.Style.default, handler: { action in
         }))
         viewController.present(alert, animated: true, completion: nil)
     }

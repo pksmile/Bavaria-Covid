@@ -16,6 +16,12 @@ class MapPresenter: MapViewToPresenterProtocol {
     
     // MARK: - Methods
     func updateView() {
+        fetchCovidCases()
+        Timer.scheduledTimer(timeInterval: timeToLoadData, target: self, selector: #selector(fetchCovidCases), userInfo: nil, repeats: true)
+    }
+    
+    @objc func fetchCovidCases() {
+        view?.onFetchStart()
         interactor?.fetchCovidCases()
     }
     
@@ -26,8 +32,9 @@ class MapPresenter: MapViewToPresenterProtocol {
 
 // MARK: - LiveNewsListInteractorToPresenterProtocol
 extension MapPresenter: MapInteractorToPresenterProtocol {
-    
+
     func covidCaseFetched() {
+        view?.onFetchEnd()
         view?.drawColorsOnMap()
     }
     
@@ -35,3 +42,4 @@ extension MapPresenter: MapInteractorToPresenterProtocol {
         view?.showError()
     }
 }
+

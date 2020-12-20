@@ -10,6 +10,8 @@ import UIKit
 protocol MapPresenterToViewProtocol: class {
     func drawColorsOnMap()
     func showError()
+    func onFetchStart()
+    func onFetchEnd()
 }
 
 protocol MapInteractorToPresenterProtocol: class {
