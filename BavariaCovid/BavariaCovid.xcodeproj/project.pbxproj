@@ -23,6 +23,8 @@
 		840BB555258C9D9E0050331D /* RingsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840BB554258C9D9E0050331D /* RingsModel.swift */; };
 		840BB55E258CA0340050331D /* CovidCaseResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840BB55D258CA0340050331D /* CovidCaseResponse.swift */; };
 		840BB562258CA1020050331D /* ColorConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840BB561258CA1020050331D /* ColorConstants.swift */; };
+		847A82B0258F0CC100393734 /* Rules.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847A82AF258F0CC100393734 /* Rules.swift */; };
+		847A82B3258F0D1F00393734 /* NotificationExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847A82B2258F0D1F00393734 /* NotificationExtension.swift */; };
 		84B154F0258CB45500FFF948 /* AlertControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B154EF258CB45500FFF948 /* AlertControl.swift */; };
 		84B154F3258CB5EE00FFF948 /* MapAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B154F2258CB5EE00FFF948 /* MapAnnotation.swift */; };
 		84B154F6258CB75300FFF948 /* LocationPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B154F5258CB75300FFF948 /* LocationPresenter.swift */; };
@@ -50,6 +52,8 @@
 		840BB554258C9D9E0050331D /* RingsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RingsModel.swift; sourceTree = "<group>"; };
 		840BB55D258CA0340050331D /* CovidCaseResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CovidCaseResponse.swift; sourceTree = "<group>"; };
 		840BB561258CA1020050331D /* ColorConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorConstants.swift; sourceTree = "<group>"; };
+		847A82AF258F0CC100393734 /* Rules.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rules.swift; sourceTree = "<group>"; };
+		847A82B2258F0D1F00393734 /* NotificationExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationExtension.swift; sourceTree = "<group>"; };
 		84B154EF258CB45500FFF948 /* AlertControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertControl.swift; sourceTree = "<group>"; };
 		84B154F2258CB5EE00FFF948 /* MapAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapAnnotation.swift; sourceTree = "<group>"; };
 		84B154F5258CB75300FFF948 /* LocationPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationPresenter.swift; sourceTree = "<group>"; };
@@ -178,6 +182,7 @@
 				840BB551258C9D350050331D /* CovidcaseModel.swift */,
 				840BB554258C9D9E0050331D /* RingsModel.swift */,
 				84B154F2258CB5EE00FFF948 /* MapAnnotation.swift */,
+				847A82AF258F0CC100393734 /* Rules.swift */,
 			);
 			path = Entity;
 			sourceTree = "<group>";
@@ -186,6 +191,7 @@
 			isa = PBXGroup;
 			children = (
 				840BB561258CA1020050331D /* ColorConstants.swift */,
+				847A82B2258F0D1F00393734 /* NotificationExtension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -292,12 +298,14 @@
 				84B1550D258CC4AC00FFF948 /* MapRouter.swift in Sources */,
 				840BB562258CA1020050331D /* ColorConstants.swift in Sources */,
 				84B15509258CBD2D00FFF948 /* MapPresenter.swift in Sources */,
+				847A82B3258F0D1F00393734 /* NotificationExtension.swift in Sources */,
 				840BB54F258C9BCD0050331D /* FeatureModel.swift in Sources */,
 				840BB52F258C988E0050331D /* WebServiceErros.swift in Sources */,
 				840BB55E258CA0340050331D /* CovidCaseResponse.swift in Sources */,
 				840BB536258C9A020050331D /* AppDelegate.swift in Sources */,
 				84B154F3258CB5EE00FFF948 /* MapAnnotation.swift in Sources */,
 				84B15504258CBBDA00FFF948 /* MapUpdateProtocols.swift in Sources */,
+				847A82B0258F0CC100393734 /* Rules.swift in Sources */,
 				840BB535258C9A020050331D /* SceneDelegate.swift in Sources */,
 				840BB53F258C9A690050331D /* MapVC.swift in Sources */,
 			);

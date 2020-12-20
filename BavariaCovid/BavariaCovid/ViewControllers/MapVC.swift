@@ -91,8 +91,14 @@ extension MapVC : MKMapViewDelegate{
 extension MapVC: MapPresenterToViewProtocol {
 
     func drawColorsOnMap(){
+        let overlays = mapView.overlays
+        if overlays.count > 0 {
+            mapView.removeOverlays(overlays)
+        }
+        
         presenter?.allFeatures()?.forEach { (feature) in
             self.drawOverlay(feature: feature)
+            self.checkUserState(feature: feature)
         }
     }
     
@@ -108,6 +114,38 @@ extension MapVC: MapPresenterToViewProtocol {
     
     func showError() {
         AlertControl().showAlert(title: "Error", message: "Can Not fetch data from server.", viewController: self, okButtonTitle: "Okay")
+    }
+    
+    func onLocationChange() {
+        presenter?.allFeatures()?.forEach({ (feature) in
+            checkUserState(feature: feature)
+        })
+    }
+    
+    func checkUserState(feature: FeatureModel) {
+        let locationCoordinates: [CLLocationCoordinate2D] = feature.toCoordinates()
+        let polygons = MKPolygon(coordinates: locationCoordinates, count: locationCoordinates.count)
+        let polygonRenderer = MKPolygonRenderer(polygon: polygons)
+        let mapPoint: MKMapPoint = MKMapPoint((locationPresenter?.currentUserLocation.coordinate)!)
+        let polygonViewPoint: CGPoint = polygonRenderer.point(for: mapPoint)
+
+        if polygonRenderer.path.contains(polygonViewPoint)
+        {
+            switch feature.attributes!.cases7_per_100k {
+            case 0..<35:
+                UNUserNotificationCenter.sendCovideAlertMsg(title: "Bavaria Covid", message: rules.green.rawValue)
+            case 36..<50:
+                UNUserNotificationCenter.sendCovideAlertMsg(title: "Bavaria Covid", message: rules.yellow.rawValue)
+            case 51..<100:
+                UNUserNotificationCenter.sendCovideAlertMsg(title: "Bavaria Covid", message: rules.red.rawValue)
+            default:
+                UNUserNotificationCenter.sendCovideAlertMsg(title: "Bavaria Covid", message: rules.darkGreen.rawValue)
+            }
+            print("Your location was inside your polygon.\(String(describing: feature.attributes?.cases7_per_100k))")
+            
+        }else{
+            print("Not in Polygonn")
+        }
     }
 }
 
